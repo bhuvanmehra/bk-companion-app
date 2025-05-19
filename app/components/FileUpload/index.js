@@ -14,6 +14,7 @@ import {
   swapWords,
   formatFormsData,
   mapWithFormData,
+  mergeDuplicateColumns,
 } from './utils';
 import { dietaryBlackWords, medicalBlackWords, swapWordsList } from './config';
 import useFormsData from './useFormsData';
@@ -40,7 +41,8 @@ const App = () => {
         );
 
         const cleanedArray = trimEmptySpaces(removeEmptyColumns(noEmptyRows));
-        const mergedColumns = mergeColumns(cleanedArray);
+        const mergedDuplicateColumns = mergeDuplicateColumns(cleanedArray);
+        const mergedColumns = mergeColumns(mergedDuplicateColumns);
         const renamedArray = renameColumns(mergedColumns);
         const whitelistedData = getWhitelistedColumnData(renamedArray);
         const sortedData = sortByColumn(whitelistedData, 'First Name');
@@ -60,8 +62,6 @@ const App = () => {
           swapWordsList
         );
         const result = mapWithFormData(swappedWordsData, formResponses);
-        console.log('result: ', result);
-
         setParsedData(result);
 
         // Create CSV string from modified data

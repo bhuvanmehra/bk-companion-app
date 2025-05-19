@@ -9,8 +9,8 @@ import {
   cleanMobileNumbers,
   swapWords,
   formatFormsData,
-  formatFormsDatas,
   mapWithFormData,
+  mergeDuplicateColumns,
 } from './utils';
 import { describe, test, expect } from '@jest/globals';
 import { dietaryBlackWords, swapWordsList } from './config';
@@ -793,6 +793,25 @@ describe('utils', () => {
         ],
       ];
       const result = mapWithFormData(mockData, mockFormResponses);
+      expect(result).toEqual(expectedOutput);
+    });
+  });
+
+  describe('mergeDuplicateColumns', () => {
+    const mockInput = [
+      ['First Name', 'Last Name', 'First name', 'Last Name', 'Email'],
+      ['Clark', '', 'Clark', 'Kent', 'superman@gmail.com'],
+      ['', 'Wayne', 'Bruce', '', 'batman@gmail.com'],
+    ];
+
+    const expectedOutput = [
+      ['First Name', 'Last Name', 'Email'],
+      ['Clark', 'Kent', 'superman@gmail.com'],
+      ['Bruce', 'Wayne', 'batman@gmail.com'],
+    ];
+
+    test('removes duplicate column names', () => {
+      const result = mergeDuplicateColumns(mockInput);
       expect(result).toEqual(expectedOutput);
     });
   });

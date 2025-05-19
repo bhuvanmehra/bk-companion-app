@@ -8,8 +8,7 @@ export const dynamic = 'force-dynamic';
 export async function GET() {
   try {
     // Get form ID from query params or environment variable
-    const headersList = headers();
-    const formId = headersList.get('x-form-id') || process.env.GOOGLE_FORM_ID;
+    const formId = process.env.GOOGLE_FORM_ID;
 
     if (!formId) {
       return NextResponse.json(

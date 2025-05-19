@@ -116,6 +116,51 @@ export const mergeColumns = (data) => {
   return updatedData;
 };
 
+export const mergeDuplicateColumns = (data) => {
+  if (data.length === 0) return [];
+  const headers = data[0];
+  const rows = data.slice(1);
+
+  const indexMap = headers.reduce((acc, val, idx) => {
+    const key = val.trim().toLowerCase(); // Case-insensitive and trimmed
+    acc[key] = acc[key] || [];
+    acc[key].push(idx);
+    return acc;
+  }, {});
+  console.log('indexMap: ', indexMap);
+
+  // Find the first index for each unique header (case-insensitive)
+  const uniqueHeaderIndexes = [];
+  const uniqueHeaders = [];
+
+  Object.entries(indexMap).forEach(([header, indexes]) => {
+    uniqueHeaderIndexes.push(indexes[0]);
+    uniqueHeaders.push(headers[indexes[0]]);
+  });
+
+  const mergedRows = rows.map((row) => {
+    const newRow = [];
+    Object.entries(indexMap).forEach(([_, indexes]) => {
+      // Start with the value from the first occurrence
+      let value = row[indexes[0]];
+      // If empty, look for a non-empty value in the duplicates
+      if (!value) {
+        for (let i = 1; i < indexes.length; i++) {
+          if (row[indexes[i]]) {
+            value = row[indexes[i]];
+            break;
+          }
+        }
+      }
+      newRow.push(value);
+    });
+    return newRow;
+  });
+
+  const updatedData = [uniqueHeaders, ...mergedRows];
+  return updatedData;
+};
+
 const existsInArrayIgnoreCase = (array, value) => {
   return array.some((item) => item.toLowerCase() === value.toLowerCase());
 };
