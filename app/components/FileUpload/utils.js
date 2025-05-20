@@ -127,7 +127,6 @@ export const mergeDuplicateColumns = (data) => {
     acc[key].push(idx);
     return acc;
   }, {});
-  console.log('indexMap: ', indexMap);
 
   // Find the first index for each unique header (case-insensitive)
   const uniqueHeaderIndexes = [];

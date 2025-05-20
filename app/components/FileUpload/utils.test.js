@@ -799,15 +799,24 @@ describe('utils', () => {
 
   describe('mergeDuplicateColumns', () => {
     const mockInput = [
-      ['First Name', 'Last Name', 'First name', 'Last Name', 'Email'],
-      ['Clark', '', 'Clark', 'Kent', 'superman@gmail.com'],
-      ['', 'Wayne', 'Bruce', '', 'batman@gmail.com'],
+      [
+        'First Name',
+        'Last Name',
+        'First name',
+        'Last Name',
+        'Email',
+        'First name',
+      ],
+      ['Clark', '', 'Clark', 'Kent', 'superman@gmail.com', ''],
+      ['', 'Wayne', 'Bruce', '', 'batman@gmail.com', ''],
+      ['', '', 'Clark', 'Kent', 'superman@gmail.com', 'Clark'],
     ];
 
     const expectedOutput = [
       ['First Name', 'Last Name', 'Email'],
       ['Clark', 'Kent', 'superman@gmail.com'],
       ['Bruce', 'Wayne', 'batman@gmail.com'],
+      ['Clark', 'Kent', 'superman@gmail.com'],
     ];
 
     test('removes duplicate column names', () => {
