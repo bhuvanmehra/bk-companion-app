@@ -78,12 +78,20 @@ export const renameColumns = (data) => {
 
   const headers = data[0];
 
-  // Create new headers by mapping through existing ones
-  const newHeaders = headers.map(
-    (header) => renameColumnsMap[header] || header
+  // Build a lowercased map for case-insensitive lookup
+  const lowerCaseRenameMap = Object.keys(renameColumnsMap).reduce(
+    (acc, key) => {
+      acc[key.toLowerCase()] = renameColumnsMap[key];
+      return acc;
+    },
+    {}
   );
 
-  // Return new array with renamed headers and original data
+  const newHeaders = headers.map((header) => {
+    const key = header.trim().toLowerCase();
+    return lowerCaseRenameMap[key] || header;
+  });
+
   return [newHeaders, ...data.slice(1)];
 };
 
@@ -249,7 +257,7 @@ export const cleanMobileNumbers = (data) => {
 
   const headers = data[0];
   const mobileIndex = headers.findIndex(
-    (header) => header.toLowerCase() === 'mobile number'
+    (header) => header.toLowerCase() === 'mobile'
   );
 
   if (mobileIndex === -1) return data;

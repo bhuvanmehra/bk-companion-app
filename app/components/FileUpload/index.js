@@ -18,12 +18,13 @@ import {
 } from './utils';
 import { dietaryBlackWords, medicalBlackWords, swapWordsList } from './config';
 import useFormsData from './useFormsData';
+import get from 'lodash/get';
 
 const App = () => {
   const [parsedData, setParsedData] = useState([]);
   const [error, setError] = useState('');
   const { data, isLoading, error: formsDataError } = useFormsData();
-  const formResponses = data && formatFormsData(data.formResponses);
+  const formResponses = formatFormsData(get(data, 'formResponses', []));
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];

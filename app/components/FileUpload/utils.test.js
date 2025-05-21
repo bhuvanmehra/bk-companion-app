@@ -168,6 +168,7 @@ describe('utils', () => {
           'First Name',
           'Last Name',
           'Email Address',
+          'Mobile number',
           'Are you coming by car or public transport?',
           'Do you have any medical condition we should know about? If so please write here.',
           'Do you have any special dietary requirements? If yes,fill in box below:',
@@ -180,6 +181,7 @@ describe('utils', () => {
           'First Name',
           'Last Name',
           'Email Address',
+          'Mobile',
           'Transport',
           'Medical',
           'Dietary',
@@ -358,7 +360,7 @@ describe('utils', () => {
           'Transport',
           'Do you have any special dietary requirements? If yes,fill in box below:',
           'Do you have any medical condition we should know about? If so please write here.',
-          'Mobile Number',
+          'Mobile',
           'Who would you like to share a room with if appropriate.',
           'First name',
           'Last name',
@@ -392,7 +394,7 @@ describe('utils', () => {
           'First Name',
           'Last Name',
           'Gender',
-          'Mobile Number',
+          'Mobile',
           'Email',
           'Booking',
           'Transport',
@@ -422,7 +424,7 @@ describe('utils', () => {
           'Transport',
           'Share',
           'Sharing',
-          'Mobile number',
+          'Mobile',
         ],
         [
           'XXXX',
@@ -455,7 +457,7 @@ describe('utils', () => {
           'First Name',
           'Last Name',
           'Gender',
-          'Mobile Number',
+          'Mobile',
           'Email',
           'Booking',
           'Transport',
@@ -567,7 +569,7 @@ describe('utils', () => {
   describe('cleanMobileNumbers', () => {
     test('cleans mobile numbers', () => {
       const input = [
-        ['First Name', 'Mobile Number'],
+        ['First Name', 'Mobile'],
         ['John', '0452401600'],
         ['Alice', '+61452401600'],
         ['Bob', '452401600'],
@@ -576,7 +578,7 @@ describe('utils', () => {
       ];
 
       const expected = [
-        ['First Name', 'Mobile Number'],
+        ['First Name', 'Mobile'],
         ['John', '452401600'],
         ['Alice', '452401600'],
         ['Bob', '452401600'],
@@ -809,7 +811,7 @@ describe('utils', () => {
       ],
       ['Clark', '', 'Clark', 'Kent', 'superman@gmail.com', ''],
       ['', 'Wayne', 'Bruce', '', 'batman@gmail.com', ''],
-      ['', '', 'Clark', 'Kent', 'superman@gmail.com', 'Clark'],
+      ['', '', '', 'Kent', 'superman@gmail.com', 'Clark'],
     ];
 
     const expectedOutput = [

@@ -2,7 +2,7 @@ export const whiteListColumns = [
   'First Name',
   'Last Name',
   'Gender',
-  'Mobile Number',
+  'Mobile',
   'Email',
   'Booking',
   'Transport',
@@ -15,6 +15,7 @@ export const whiteListColumns = [
 
 export const renameColumnsMap = {
   'First name': 'First Name',
+  'Mobile Number': 'Mobile',
   'Are you coming by car or public transport?': 'Transport',
   'Do you have any medical condition we should know about? If so please write here.':
     'Medical',
@@ -47,6 +48,7 @@ export const dietaryBlackWords = [
   'nil',
   'None',
   'N/A',
+  'Not',
 ];
 
 export const medicalBlackWords = ['No', 'NA', 'None', 'N/A', 'nil', 'Nill'];
